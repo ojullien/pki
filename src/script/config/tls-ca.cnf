@@ -1,0 +1,33 @@
+## -----------------------------------------------------
+## openssl.
+## TLS Signing CA Configuration file.
+##
+## @category  openssl
+## @package   Configuration
+## @license Apache-2.0 <https://github.com/ojullien/pki/blob/master/LICENSE>
+## -----------------------------------------------------
+
+## -----------------------------------------------------
+## Files
+## -----------------------------------------------------
+
+m_CA_TLS_CONFIG=$m_DIR_CONFIG/openssl/tls-ca.cnf
+m_CA_TLS_KEY=$m_DIR_CA/private/tls-ca.key
+m_CA_TLS_CERT=$m_DIR_CRT/tls-ca.crt
+m_CA_TLS_PEM=$m_DIR_CRT/tls-ca-chain.pem
+
+## -----------------------------------------------------
+## Others
+## -----------------------------------------------------
+m_CA_TLS_PWD=wheezy.tlsca
+
+## -----------------------------------------------------
+## Trace
+## -----------------------------------------------------
+
+display "-----------------------------------------------------"
+notice " TLS Signing CA Configuration:"
+checkFile "\tConfiguration file is:\t\t${m_CA_TLS_CONFIG}" $m_CA_TLS_CONFIG
+checkFile "\tPrivate key file is:\t\t${m_CA_TLS_KEY}" $m_CA_TLS_KEY
+checkFile "\tCertificate is:\t\t\t${m_CA_TLS_CERT}" $m_CA_TLS_CERT
+checkFile "\tPEM bundle is:\t\t\t${m_CA_TLS_PEM}" $m_CA_TLS_PEM

@@ -1,0 +1,47 @@
+# TLS server certificate request Configuration File
+
+# The [default] section contains global constants that can be referred to from
+# the entire configuration file. It may also hold settings pertaining to more
+# than one openssl command.
+
+[ default ]
+HOME           = .
+ca             = server                  # CA name
+dir            = /root/work/pki          # Top dir
+mKEY           = $dir/ca/private/$ca.key
+SAN            = IP:192.168.33.92
+
+# The next part of the configuration file is used by the openssl req command.
+
+[ req ]
+#input_password          =                 # password for the input private key file    -passin
+#output_password         =                 # password for the output private key file   -passout
+default_bits            = 4096             # RSA key size                               -newkey
+default_keyfile         = $mKEY           # default filename to write a private key to -keyout
+#oid_file                                  # file containing additional OBJECT IDENTIFIERS
+#oid_section             = new_oids        # extra object identifiers
+RANDFILE                = $ENV::HOME/.rnd # filename in which random number seed information
+encrypt_key             = no              # Protect private key                        -nodes
+default_md              = sha256          # MD to use                                  -[digest]
+string_mask             = utf8only        # Emit UTF-8 strings
+prompt                  = no              # Don't prompt for DN
+utf8                    = yes             # Input is UTF-8
+#attributes              = []              # section containing any request attributes
+distinguished_name      = server_dn       # DN section
+req_extensions          = server_reqext   # Desired extensions                         -reqexts
+#x509_extensions         =                 # The extentions to add to the
+                                           #cert when -x509 is used                    -extensions
+
+[ server_dn ]
+C                      = "FR"                           # countryName
+L                      = "Paris"                        # localityName
+O                      = "Wheezy"                       # organizationName
+OU                     = "Wheezy Certificate Authority" # organizationalUnitName
+CN                     = "MySQL Server"                 # commonName
+emailAddress           = "olivierjullien@outlook.com"   #
+
+[ server_reqext ]
+keyUsage                = critical,digitalSignature,keyEncipherment
+extendedKeyUsage        = serverAuth,clientAuth
+subjectKeyIdentifier    = hash
+subjectAltName          = $ENV::SAN

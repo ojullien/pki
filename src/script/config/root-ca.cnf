@@ -1,0 +1,33 @@
+## -----------------------------------------------------
+## openssl.
+## Root CA Configuration file.
+##
+## @category  openssl
+## @package   Configuration
+## @license Apache-2.0 <https://github.com/ojullien/pki/blob/master/LICENSE>
+## -----------------------------------------------------
+
+## -----------------------------------------------------
+## Files
+## -----------------------------------------------------
+
+m_CA_ROOT_CONFIG=$m_DIR_CONFIG/openssl/root-ca.cnf
+m_CA_ROOT_KEY=$m_DIR_CA/private/root-ca.key
+m_CA_ROOT_CERT=$m_DIR_CRT/root-ca.crt
+m_CA_ROOT_PEM=$m_DIR_CRT/root-ca-chain.pem
+
+## -----------------------------------------------------
+## Others
+## -----------------------------------------------------
+m_CA_ROOT_PWD=wheezy.rootca
+
+## -----------------------------------------------------
+## Trace
+## -----------------------------------------------------
+
+display "-----------------------------------------------------"
+notice " Root CA Configuration:"
+checkFile "\tConfiguration file is:\t\t${m_CA_ROOT_CONFIG}" $m_CA_ROOT_CONFIG
+checkFile "\tPrivate key file is:\t\t${m_CA_ROOT_KEY}" $m_CA_ROOT_KEY
+checkFile "\tCertificate is:\t\t\t${m_CA_ROOT_CERT}" $m_CA_ROOT_CERT
+checkFile "\tPEM bundle is:\t\t\t${m_CA_ROOT_PEM}" $m_CA_ROOT_PEM

@@ -1,0 +1,58 @@
+## -----------------------------------------------------
+## openssl.
+## Main Configuration file.
+##
+## @category  openssl
+## @package   Configuration
+## @license Apache-2.0 <https://github.com/ojullien/pki/blob/master/LICENSE>
+## -----------------------------------------------------
+
+## -----------------------------------------------------
+## Date
+## -----------------------------------------------------
+
+m_DATE="$(/bin/date +"%Y%m%d")_$(/bin/date +"%H%M")"
+
+## -----------------------------------------------------
+## Main Directories
+## -----------------------------------------------------
+
+m_DIR_SCRIPT=`pwd`
+m_DIR="$(dirname ${m_DIR_SCRIPT})"
+m_LOGFILE=$m_DIR_SCRIPT/log/$(/bin/date +"%Y%m%d")-$(/bin/date +"%H%M")_$(/usr/bin/basename "$0").log
+
+# Directory holds configuration files
+m_DIR_CONFIG=$m_DIR_SCRIPT/config
+# Directory holds all types of certificates
+m_DIR_CERTS=$m_DIR/certs
+# Directory holds user certificates
+m_DIR_CRT=$m_DIR_CERTS/crt
+# Directory holds revoked certificates
+m_DIR_CRL=$m_DIR_CERTS/crl
+# Directory holds Certificate Signing Request
+m_DIR_CSR=$m_DIR_CERTS/csr
+# Directory holds CA resources
+m_DIR_CA=$m_DIR/ca
+
+## -----------------------------------------------------
+## CA names
+## -----------------------------------------------------
+
+m_CA_NAMES="root-ca tls-ca"
+
+## -----------------------------------------------------
+## Trace
+## -----------------------------------------------------
+
+display "-----------------------------------------------------"
+notice " Main Configuration:"
+checkDir "\tWorking directory:\t\t\t${m_DIR}" $m_DIR
+checkDir "\tScript directory:\t\t\t${m_DIR_SCRIPT}" $m_DIR_SCRIPT
+checkDir "\tConfiguration directory:\t\t${m_DIR_CONFIG}" $m_DIR_CONFIG
+checkDir "\tCertificates directory:\t\t\t${m_DIR_CERTS}" $m_DIR_CERTS
+checkDir "\tIssued certificates directory:\t\t${m_DIR_CRT}" $m_DIR_CRT
+checkDir "\tRevoked certificates directory:\t\t${m_DIR_CRL}" $m_DIR_CRL
+checkDir "\tCertificate signing request directory:\t${m_DIR_CSR}" $m_DIR_CSR
+checkDir "\tCA resources directory:\t\t\t${m_DIR_CA}" $m_DIR_CA
+checkFile "\tLog file is:\t\t\t\t${m_LOGFILE}" $m_LOGFILE
+notice "\tCA names are:\t\t\t\t${m_CA_NAMES}"
